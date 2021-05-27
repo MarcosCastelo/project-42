@@ -38,4 +38,5 @@ $ bin/rails server
 ### Server
 
 ## Additional Documentation and Acknowledgments
+[Database model](docs/database/db_model.png)
 
