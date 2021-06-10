@@ -20,7 +20,6 @@ ActiveRecord::Schema.define(version: 2021_06_04_161651) do
     t.string "author"
     t.integer "year_release"
     t.string "image"
-    t.string "null"
     t.integer "last_chapter"
     t.string "link", null: false
     t.datetime "created_at", precision: 6, null: false
