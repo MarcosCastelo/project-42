@@ -6,16 +6,12 @@ one:
   year_release: 
   image: MyString
   last_chapter: MyString
-  int: MyString
   link: MyString
-  string: MyString
 
 two:
   title: MyString
   author: MyString
   year_release: 
   image: MyString
-  last_chapter: MyString
-  int: MyString
+  last_chapter: MyStrings
   link: MyString
-  string: MyString
