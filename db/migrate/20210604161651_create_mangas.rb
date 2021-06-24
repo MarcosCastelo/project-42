@@ -4,7 +4,7 @@ class CreateMangas < ActiveRecord::Migration[6.1]
       t.string :title, :null => false
       t.string :author
       t.integer :year_release
-      t.string :image, :null
+      t.string :image
       t.integer :last_chapter
       t.string :link, :null => false
 
