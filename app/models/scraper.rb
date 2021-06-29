@@ -2,29 +2,35 @@ require 'nokogiri'
 require 'open-uri'
 
 class Scraper
-  def initialize(base_url)
-    @url = base_url
+  def self.attach_manga(url)
+    if url
+      html = URI.open(url)
+      doc = Nokogiri::HTML(html)
+
+      manga = {
+        "title" => doc.css('.detail-info-right-title-font')[0].children.text,
+        "author" => doc.css('.detail-info-right-say a')[0]['title'],
+        "last_chapter" => doc.css('.detail-main-list-main .title3')[0].children.text,
+        "image" => doc.css('.detail-info-cover-img')[0]['src'],
+        "status" => doc.css('.detail-info-right-title-tip')[0].children.text,
+        "link" => url
+      }
+      return self.save(manga)
+    end
   end
 
-  def search(param)
-    html = URI.open(@url + param)
-    doc = Nokogiri::HTML(html)
-
-    mangas = []
-
-    doc.css(".manga-list-4-list li").each do |item|
-      manga = {
-        "title" => item.css('.manga-list-4-item-title a').first['title'],
-        "author" => item.css('.manga-list-4-item-tip a').first['title'],
-        "last_chapter" => item.css('.manga-list-4-item-tip a')[1].children.text,
-        "image" => item.css('.manga-list-4-cover')[0]['src'],
-        "status" => item.css('.manga-list-4-show-tag-list-2 a')[0].children.text,
-        "link" => @url + item.css('a')[0]['href']
-
-      }
-      mangas.append(manga)
+  def self.save(manga_attributes)
+    manga = Manga.where(manga_attributes)
+    if manga.empty?
+      new_manga = Manga.new(manga_attributes)
+      if new_manga.save
+        return new_manga
+      else
+        return nil
+      end
+    else
+      return manga[0]
     end
     
-    mangas
   end
 end
