@@ -2,10 +2,15 @@ require 'nokogiri'
 require 'open-uri'
 
 class Scraper
-  def self.attach_manga(url)
+
+  def get_site_response(url)
     if url
       html = URI.open(url)
       doc = Nokogiri::HTML(html)
+  end
+
+  def self.attach_manga(response)
+      doc = get_site_response(response)
 
       manga = {
         "title" => doc.css('.detail-info-right-title-font')[0].children.text,
@@ -16,7 +21,6 @@ class Scraper
         "link" => url
       }
       return self.save(manga)
-    end
   end
 
   def self.save(manga_attributes)
