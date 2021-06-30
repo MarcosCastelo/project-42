@@ -1,24 +1,41 @@
-# README
+# Project 42
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+The project is a manga monitoring system taken from the mangafox website
 
-Things you may want to cover:
+## Getting Started
 
-* Ruby version
+### Prerequisites
 
-* System dependencies
+The things you need before installing the software.
 
-* Configuration
+* ruby ^3.0.0
+* rails ^6.1.3.2
+* bundle ^2.2.15
+* postgresql ^13 
 
-* Database creation
+### Installation
 
-* Database initialization
+Clone or download the repository, then install dependencies
+```bash
+$ gem install bundler
+$ bundle install
+```
+Create databases and run migrations
+```bash 
+$ bin/rake db:create
+$ bin/rake db:migrate
+```
 
-* How to run the test suite
+For last run the server
+```bash
+$ bin/rails server
+```
 
-* Services (job queues, cache servers, search engines, etc.)
+## Usage
 
-* Deployment instructions
+## Deployment
 
-* ...
+### Server
+
+## Additional Documentation and Acknowledgments
+
