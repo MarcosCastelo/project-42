@@ -7,6 +7,7 @@ class Scraper
     if url
       html = URI.open(url)
       doc = Nokogiri::HTML(html)
+    end
   end
 
   def self.attach_manga(response)
