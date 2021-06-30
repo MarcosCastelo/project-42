@@ -2,39 +2,45 @@ require 'nokogiri'
 require 'open-uri'
 
 class Scraper
-
-  def get_site_response(url)
-    if url
-      html = URI.open(url)
-      doc = Nokogiri::HTML(html)
+  def initialize(url)
+    @url = url
+    @manga_params = self.get_manga_params
+  end
+  
+  def get_site_response
+    html = URI.open(@url)
+    doc = Nokogiri::HTML(html)
+    return doc
   end
 
-  def self.attach_manga(response)
-      doc = get_site_response(response)
-
+  def get_manga_params
+    doc = self.get_site_response
+    if doc
       manga = {
         "title" => doc.css('.detail-info-right-title-font')[0].children.text,
         "author" => doc.css('.detail-info-right-say a')[0]['title'],
         "last_chapter" => doc.css('.detail-main-list-main .title3')[0].children.text,
         "image" => doc.css('.detail-info-cover-img')[0]['src'],
         "status" => doc.css('.detail-info-right-title-tip')[0].children.text,
-        "link" => url
+        "link" => @url
       }
-      return self.save(manga)
+      return manga
+    end
   end
 
-  def self.save(manga_attributes)
-    manga = Manga.where(manga_attributes)
-    if manga.empty?
-      new_manga = Manga.new(manga_attributes)
+
+  def save
+    puts "MANGA_PARAMS => #{@manga_params}"
+    manga = Manga.where(@manga_params)[0]
+    puts "WHERE RESULT => #{manga}"
+    if !manga
+      new_manga = Manga.new(@manga_params)
       if new_manga.save
         return new_manga
-      else
-        return nil
+      return nil
       end
-    else
-      return manga[0]
     end
-    
+
+    return manga
   end
 end
