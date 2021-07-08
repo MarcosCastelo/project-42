@@ -26,8 +26,9 @@ $ bin/rake db:create
 $ bin/rake db:migrate
 ```
 
-For last run the server
+For last run whenever and the server
 ```bash
+$ whenever --update-crontab
 $ bin/rails server
 ```
 

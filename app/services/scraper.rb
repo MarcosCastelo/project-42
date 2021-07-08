@@ -36,6 +36,7 @@ class Scraper
   def save
     puts "MANGA_PARAMS => #{@manga_params}"
     manga = Manga.where(link: @url)[0]
+
     puts "WHERE RESULT => #{manga}"
     if !manga
       new_manga = Manga.new(@manga_params)
