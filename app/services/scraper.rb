@@ -6,6 +6,10 @@ class Scraper
     @url = url
     @manga_params = self.get_manga_params
   end
+
+  def manga_params
+    @manga_params
+  end
   
   def get_site_response
     html = URI.open(@url)
@@ -31,7 +35,7 @@ class Scraper
 
   def save
     puts "MANGA_PARAMS => #{@manga_params}"
-    manga = Manga.where(@manga_params)[0]
+    manga = Manga.where(link=@manga_params[:link])[0]
     puts "WHERE RESULT => #{manga}"
     if !manga
       new_manga = Manga.new(@manga_params)
