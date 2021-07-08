@@ -1,2 +1,17 @@
 <h1><%= @manga.title %></h1>
 <p><%= @manga.link %></p>
+
+<%= form_tag(show_url, :method => "get") do %>  
+  <div class="input-group">  
+    <%= search_field_tag :email, params[:email], placeholder: "Add your email", class: "form-control" %>  
+    <div class="input-group-btn">  
+      <%= button_tag "Monitor",:name => nil %>  
+    </div>  
+  </div>  
+<% end %>
+
+<% if @user %>
+    <h3>
+        <%= @user.email %> starts monitoring <%= @manga.title %>
+    </h3>
+<% end %>
