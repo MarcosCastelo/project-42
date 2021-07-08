@@ -15,6 +15,8 @@ class MangaController < ApplicationController
       if !@manga.users.include?(@user)
         @user.mangas << @manga
         @user.save
+      else
+        @already_exist = true
       end
     end
 

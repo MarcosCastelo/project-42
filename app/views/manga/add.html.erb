@@ -1,8 +1,10 @@
+<div class="form">
 <%= form_tag(add_manga_url, :method => "get") do %>  
   <div class="input-group">  
-    <%= search_field_tag :search, params[:search], placeholder: "Search", class: "form-control" %>  
+    <%= search_field_tag :search, params[:search], placeholder: "Insert your manga link here", class: "form-control" %>  
     <div class="input-group-btn">  
-      <%= button_tag "Search",:name => nil %>  
+      <%= button_tag "Add",:name => nil %>  
     </div>  
   </div>  
 <% end %>
+</div>
